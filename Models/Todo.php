@@ -18,4 +18,11 @@ class Todo{
         $stmt = $this->db_manager->dbh->prepare('INSERT INTO ' . $this->table .' (name) VALUES (?)');
         $stmt->execute([$name]);
     }
+    //DBの一覧を呼び出すメソッド
+    public function all(){
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM '.$this->table);
+        $stmt->execute();
+        $tasks = $stmt->fetchAll();
+        return $tasks;
+    }
 }

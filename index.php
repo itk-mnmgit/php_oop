@@ -1,3 +1,17 @@
+<?php
+
+require_once 'function.php';
+
+require_once 'Models/Todo.php';
+$todo = new Todo();
+$tasks = $todo->all();
+
+//ソースを表示 or echo '<pre>'; echo '</pre>'; で囲む
+// var_dump($tasks);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -29,8 +43,59 @@
                 </div>
             </form>
         </section>
-        <section>
-            
+        <section class="mt-5">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="bg-secondary text-light">
+                        <th class=>TODO</th>
+                        <th>DUE DATE</th>
+                        <th>STATUS</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>create new website</td>
+                        <td>2019/08/21</td>
+                        <td>NOT YET</td>
+                        <td>
+                            <a class="text-success" href="edit.php">EDIT</a>
+                        </td>
+                        <td>
+                            <a class="text-danger" href="delete.php">DELETE</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>go to club</td>
+                        <td>2019/10/21</td>
+                        <td>DONE</td>
+                        <td>
+                            <a class="text-success" href="edit.php">EDIT</a>
+                        </td>
+                        <td>
+                        <a class="text-danger" href="delete.php">DELETE</a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+            <?php foreach ($tasks as $task):?>
+                <tr>
+                    <td>
+                    <?php echo h($task['name']); ?>
+                    </td>
+                    <td>
+                    <?php echo h($task['due_date']); ?>
+                    </td>
+                    <td>?</td>
+                        <td>
+                            <a class="text-success" href="edit.php">EDIT</a>
+                        </td>
+                        <td>
+                        <a class="text-danger" href="delete.php">DELETE</a>
+                        </td>
+                </tr>
+            <?php endforeach; ?>
+                </tbody>
+            </table>
         </section>
     </main>
 </body>
