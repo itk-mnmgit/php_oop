@@ -9,6 +9,9 @@ $tasks = $todo->all();
 //ソースを表示 or echo '<pre>'; echo '</pre>'; で囲む
 // var_dump($tasks);
 
+date_default_timezone_set('UTC');
+
+
 ?>
 
 
@@ -22,6 +25,8 @@ $tasks = $todo->all();
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 <body>
     <header class="px-5 bg-secondary">
@@ -61,14 +66,20 @@ $tasks = $todo->all();
                     <?php echo h($task['name']); ?>
                     </td>
                     <td>
-                    <?php echo h($task['due_date']); ?>
+<!-- date(”表示方法", "strtotime(表示する日時)") : 日付を表示するフォーマットを変更 -->
+<!-- strtotime(表示する日時) : 英文形式の日付を Unix タイムスタンプに変換する -->
+                    <?php echo date("F, j(D) Y H:i", strtotime($task['due_date']));?>
                     </td>
                     <td>?</td>
                         <td>
-                            <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
+                            <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
                         </td>
                         <td>
-                        <a class="text-danger" href="delete.php?id=<?php echo $task['id']; ?>">DELETE</a>
+                            <a class="text-danger" href="delete.php?id=<?php echo $task['id']; ?>">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
                         </td>
                 </tr>
             <?php endforeach; ?>
