@@ -1,8 +1,8 @@
 <?php
 
 require_once 'function.php';
-
 require_once 'Models/Todo.php';
+
 $todo = new Todo();
 $tasks = $todo->all();
 
@@ -11,6 +11,8 @@ $tasks = $todo->all();
 
 ?>
 
+
+<!-- ---------ここからHTML---------- -->
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -53,28 +55,6 @@ $tasks = $todo->all();
                         <th></th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>create new website</td>
-                        <td>2019/08/21</td>
-                        <td>NOT YET</td>
-                        <td>
-                            <a class="text-success" href="edit.php">EDIT</a>
-                        </td>
-                        <td>
-                            <a class="text-danger" href="delete.php">DELETE</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>go to club</td>
-                        <td>2019/10/21</td>
-                        <td>DONE</td>
-                        <td>
-                            <a class="text-success" href="edit.php">EDIT</a>
-                        </td>
-                        <td>
-                        <a class="text-danger" href="delete.php">DELETE</a>
-                        </td>
-                    </tr>
                 </thead>
                 <tbody>
             <?php foreach ($tasks as $task):?>
@@ -87,10 +67,10 @@ $tasks = $todo->all();
                     </td>
                     <td>?</td>
                         <td>
-                            <a class="text-success" href="edit.php">EDIT</a>
+                            <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
                         </td>
                         <td>
-                        <a class="text-danger" href="delete.php">DELETE</a>
+                        <a class="text-danger" href="delete.php?id=<?php echo $task['id']; ?>">DELETE</a>
                         </td>
                 </tr>
             <?php endforeach; ?>
