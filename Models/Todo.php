@@ -39,6 +39,17 @@ class Todo{
         $stmt = $this->db_manager->dbh->prepare('DELETE FROM '.$this->table.' WHERE id = ?');
         $stmt->execute([$id]);
     }
-
+    public function asc(){
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM '.$this->table.' ORDER BY update_at ASC');
+        $stmt->execute();
+        $tasks = $stmt->fetchAll();
+        return $tasks;
+    }
+    public function desc(){
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM '.$this->table.' ORDER BY update_at DESC');
+        $stmt->execute();
+        $tasks = $stmt->fetchAll();
+        return $tasks;
+    }
 
 }

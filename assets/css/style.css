@@ -1,3 +1,28 @@
-i{
-    color : black;
-}
+/* toggle */
+.toggle-menu dt {
+    margin: 0 0;
+    width: 80px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .toggle-menu > dd {
+    display: none;
+    margin: 0 0;
+    background-color: #fff;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    width: 80px;
+    line-height: 40px;
+    text-align: center;
+    color: #000;
+    cursor: pointer;
+  }
+
+  .toggle-menu dd + dd {
+    border-top: none;
+  }
+  /* toggleここまで */

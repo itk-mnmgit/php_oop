@@ -27,6 +27,7 @@ date_default_timezone_set('UTC');
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
 </head>
 <body>
     <header class="px-5 bg-secondary">
@@ -52,11 +53,21 @@ date_default_timezone_set('UTC');
             <table class="table table-hover">
                 <thead>
                     <tr class="bg-secondary text-light">
-                        <th class=>TODO</th>
-                        <th>DUE DATE</th>
+                        <th>TODO</th>
+                        <th>
+                            <dl class="toggle-menu">
+                                <dt class="js-toggle">UPDATE_AT</dt>
+                                <dd>
+                                    <a class="text-light" href="asc.php">ASC</a>
+                                </dd>
+                                <dd>
+                                    <a class="text-light" href="desc.php">DESC</a>
+                                </dd>
+                            </dl>
+                        </th>
                         <th>STATUS</th>
-                        <th></th>
-                        <th></th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,7 +79,7 @@ date_default_timezone_set('UTC');
                     <td>
 <!-- date(”表示方法", "strtotime(表示する日時)") : 日付を表示するフォーマットを変更 -->
 <!-- strtotime(表示する日時) : 英文形式の日付を Unix タイムスタンプに変換する -->
-                    <?php echo date("F, j(D) Y H:i", strtotime($task['due_date']));?>
+                    <?php echo date("F, j(D) Y H:i", strtotime($task['update_at']));?>
                     </td>
                     <td>?</td>
                         <td>
@@ -87,5 +98,8 @@ date_default_timezone_set('UTC');
             </table>
         </section>
     </main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src='assets/js/app.js'></script>
 </body>
 </html>
