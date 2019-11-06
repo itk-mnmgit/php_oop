@@ -12,7 +12,7 @@ $tasks = $todo->all();
 ?>
 
 
-<!-- ---------ここからHTML---------- -->
+<!-- ---------ここからHTML------------>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -38,10 +38,10 @@ $tasks = $todo->all();
         <section>
             <form class="form-row justify-content-center" action="create.php" method="POST">
                 <div class="col-10 col-md-6 py-2">
-                    <input type="text" class="form-control" placeholder="ADD TODO" name='task'>
+                    <input type="text" id="input-task" class="form-control" placeholder="ADD TODO" name='task'>
                 </div>
                 <div class="py-2 col-md-3 col-10">
-                    <button type="submit" class="col-12 btn btn-secondary">ADD</button>
+                    <button type="submit" id="add-button" class="col-12 btn btn-secondary">ADD</button>
                 </div>
             </form>
         </section>
@@ -57,26 +57,29 @@ $tasks = $todo->all();
                     </tr>
                 </thead>
                 <tbody>
-            <?php foreach ($tasks as $task):?>
-                <tr>
-                    <td>
-                    <?php echo h($task['name']); ?>
-                    </td>
-                    <td>
-                    <?php echo h($task['due_date']); ?>
-                    </td>
-                    <td>?</td>
+                <?php foreach ($tasks as $task):?>
+                    <tr>
                         <td>
-                            <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
+                        <?php echo h($task['name']); ?>
                         </td>
                         <td>
-                        <a class="text-danger" href="delete.php?id=<?php echo $task['id']; ?>">DELETE</a>
+                        <?php echo h($task['update_at']); ?>
                         </td>
-                </tr>
-            <?php endforeach; ?>
+                        <td>?</td>
+                            <td>
+                                <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
+                            </td>
+                            <td>
+                            <a data-id="<?php echo $task['id']; ?>" class="text-danger delete-button" href="delete.php?id=<?php echo $task['id']; ?>">DELETE</a>
+                            </td>
+                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </section>
     </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
