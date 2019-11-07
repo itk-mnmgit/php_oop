@@ -24,8 +24,8 @@ $(function(){
             // $('tbody').append(`<p>${data["name"]}<?p>`);
             console.log(data);
 
-            $('tbody').append(
-                `<tr>` +
+            $('tbody').prepend(
+                `<tr class = ${data['id']}>` +
                     `<td>${data['name']}</td>` +
                     `<td>${data['update_at']}</td>` +
                     `<td>?</td>` +
@@ -37,6 +37,9 @@ $(function(){
                     `</td>` +
                 `</tr>`
             );
+
+            //ADDした後入力欄リセット
+            $('#input-task').val('');
 
         }).fail((error) =>{
             console.log(error);
@@ -70,12 +73,16 @@ $(function(){
                 }
 
             }).done((data) =>{
-                console.log(data);
+            //帰ってきたIDと同じクラス名の<tr>を削除
+                $(`.${data}`).fadeOut(1000);
 
             }).fail((error) =>{
                 console.log(error);
             })
 
+   });
+
+   $(document).on('click', '.done-button', function(){
    });
 
 });

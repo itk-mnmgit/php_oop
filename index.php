@@ -54,24 +54,40 @@ $tasks = $todo->all();
                         <th>STATUS</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($tasks as $task):?>
-                    <tr>
+                    <tr class = "<?php echo h($task['id']); ?>">
                         <td>
                         <?php echo h($task['name']); ?>
                         </td>
                         <td>
                         <?php echo h($task['update_at']); ?>
                         </td>
-                        <td>?</td>
-                            <td>
-                                <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
-                            </td>
-                            <td>
-                            <a data-id="<?php echo $task['id']; ?>" class="text-danger delete-button" href="delete.php?id=<?php echo $task['id']; ?>">DELETE</a>
-                            </td>
+
+                    <?php if (h($task['done_flg']) == 0): ?>
+                        <td>NOT YET</td>
+                    <?php else : ?>
+                        <td>DONE</td>
+                    <?php endif; ?>
+
+                        <td>
+                            <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
+                        </td>
+                        <td>
+                        <a data-id="<?php echo $task['id']; ?>" class="text-danger delete-button feedoutDelete" href="delete.php?id=<?php echo $task['id']; ?>">DELETE</a>
+                        </td>
+                    <?php if (h($task['done_flg']) == 0): ?>
+                        <td>
+                            <button class="btn btn-secondary done-button btn-sm">完了</button>
+                        </td>
+                    <?php else: ?>
+                    <td>
+                            <button class="btn btn-info done-button btn-sm">未完</button>
+                        </td>
+                    <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

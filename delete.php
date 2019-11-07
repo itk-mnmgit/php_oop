@@ -8,6 +8,8 @@ $todo = new Todo();
 
 $todo->delete($id);
 
+
+//IDを返す
 echo json_encode($id);
 
 
