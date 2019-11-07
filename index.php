@@ -56,9 +56,9 @@ $tasks = $todo->all();
                         <th class=>TODO</th>
                         <th>DUE DATE</th>
                         <th>STATUS</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>EDIT</th>
+                        <th>DELETE</th>
+                        <th>CHANGE STATUS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,11 +85,15 @@ $tasks = $todo->all();
                         </td>
                     <?php if (h($task['done_flg']) == 0): ?>
                         <td>
-                            <button class="btn btn-secondary done-button btn-sm">完了</button>
+                            <button class="btn done-button btn-ml">
+                            <i class="fas fa-check-square"></i>
+                            </button>
                         </td>
                     <?php else: ?>
                     <td>
-                            <button class="btn btn-info done-button btn-sm">未完</button>
+                            <button class="btn undone-button btn-ml">
+                            <i class="far fa-check-square"></i>
+                            </button>
                         </td>
                     <?php endif; ?>
                     </tr>
