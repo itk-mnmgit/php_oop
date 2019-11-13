@@ -54,7 +54,7 @@ $tasks = $todo->all();
                 <thead>
                     <tr class="bg-secondary text-light">
                         <th class=>TODO</th>
-                        <th>DUE DATE</th>
+                        <th>UPDATE_AT</th>
                         <th>STATUS</th>
                         <th>EDIT</th>
                         <th>DELETE</th>
@@ -72,9 +72,9 @@ $tasks = $todo->all();
                         </td>
 
                     <?php if (h($task['done_flg']) == 0): ?>
-                        <td>NOT YET</td>
+                        <td class="status-<?php echo h($task['id']); ?>">NOT YET</td>
                     <?php else : ?>
-                        <td>DONE</td>
+                        <td class="status-<?php echo h($task['id']); ?>">DONE</td>
                     <?php endif; ?>
 
                         <td>
@@ -85,13 +85,13 @@ $tasks = $todo->all();
                         </td>
                     <?php if (h($task['done_flg']) == 0): ?>
                         <td>
-                            <button class="btn done-button btn-ml">
+                            <button class="btn done-button btn-ml btn-status-<?php echo $task['id']; ?>" data-id="<?php echo $task['id']; ?>">
                             <i class="fas fa-check-square"></i>
                             </button>
                         </td>
                     <?php else: ?>
                     <td>
-                            <button class="btn undone-button btn-ml">
+                            <button class="btn undone-button btn-ml btn-status-<?php echo $task['id']; ?>" data-id="<?php echo $task['id']; ?>">
                             <i class="far fa-check-square"></i>
                             </button>
                         </td>

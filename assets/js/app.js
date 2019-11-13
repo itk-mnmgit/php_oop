@@ -24,17 +24,23 @@ $(function(){
             // $('tbody').append(`<p>${data["name"]}<?p>`);
             console.log(data);
 
-            $('tbody').prepend(
+            $('tbody').append(
                 `<tr class = ${data['id']}>` +
                     `<td>${data['name']}</td>` +
                     `<td>${data['update_at']}</td>` +
-                    `<td>?</td>` +
+                    '<td class = .status- + ' + $task['id'] + '></td>' +
                     `<td>` +
                         `<a class="text-success" href="edit.php?id=${data['id']}">EDIT</a>` +
                     `</td>` +
                     `<td>` +
                         `<a data-id="${data['id']}" class="text-danger delete-button" href="delete.php?id=${data['id']}">DELETE</a>` +
                     `</td>` +
+                    `<td>` +
+                        `<button class="btn done-button btn-ml .btn-status-<?php echo $task['id']; ?>" data-id="<?php echo $task['id']; ?>">` +
+                        `<i class="fas fa-check-square"></i>` +
+                        `</button>`+
+                    `</td>` +
+
                 `</tr>`
             );
 
@@ -83,6 +89,52 @@ $(function(){
    });
 
    $(document).on('click', '.done-button', function(){
+    let selectedId = $(this).data('id');
+
+    $.ajax({
+        url : 'done.php',
+        type : 'GET',
+        dataType : 'json',
+        data : {
+            id : selectedId
+        }
+
+    }).done( (data) => {
+        // $(this).fadeIn(1000, function() {
+            $(this).removeClass('done-button');
+            $(this).addClass('undone-button');
+            $('.btn-status-' + data).html('<i class="far fa-check-square"></i>');
+            $('.status-' + data).text('DONE');
+        // });
+
+    }).fail( (error) =>{
+        console.log(error)
+    })
+   });
+
+   $(document).on('click', '.undone-button', function(){
+    let selectedId = $(this).data('id');
+
+    $.ajax({
+        url : 'undone.php',
+        type : 'GET',
+        dataType : 'json',
+        data : {
+            id : selectedId
+        }
+
+    }).done( (data) => {
+
+        // $(this).fadeIn(1000, function() {
+            $(this).removeClass('undone-button');
+            $(this).addClass('done-button');
+            $('.btn-status-' + data).html('<i class="fas fa-check-square"></i>');
+            $('.status-' + data).text('NOT YET');
+        // });
+
+    }).fail( (error) =>{
+        console.log(error)
+    })
    });
 
 });
